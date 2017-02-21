@@ -1,6 +1,6 @@
 {
 "entrypoint": "/",
-"shell": "src/the-app.html",
+"shell": "src/page-router.html",
 "fragments": [
     "src/lazy-load.html"
 ],
