@@ -17,6 +17,8 @@
         <app-location route="{{route}}"></app-location>
         <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
         <iron-pages role="main" selected="[[page]]" attr-for-selected="name" fallback-selection="path-warning">
+                <home-page id="home" name="home" route="[[subroute]]"></home-page>
+                <about-page id="about" name="about" route="[[subroute]]"></home-page>
         </iron-pages>
     </template>
 
@@ -28,10 +30,63 @@
                     type: String,
                     value: 'the-app',
                 },
+                page: {
+                    type: String,
+                    observer: '_pageChanged'
+                },
             },
-        ready:function(){
-            console.log(this.route);
-        },
+            observers: [
+                '_routePageChanged(routeData.page)',
+            ],
+            ready:function(){
+                console.log(this.route);
+            },
+            _pageChanged: function(page, oldPage){
+                console.log("Page Changed" + this.page);
+                var href;
+                switch(page) {
+                    case 'about':
+                    href = 'pages/about-page.html';
+                    break;
+                    
+                    case 'home':
+                    href = 'pages/home-page.html';
+                    break;
+                    
+                    default:
+                    href = 'pages/home-page.html';
+                    break;
+                }
+                this.importHref(
+                    this.resolveUrl(href),
+                    this._pageLoaded.bind(this, Boolean(oldPage)),
+                    null,
+                    true);
+
+            },
+            _routePageChanged: function(page) {
+                if (!page) {
+                    this.set('route.path', 'home');
+                    return;
+                }
+                this.page = page;
+                Polymer.AppLayout.scroll({ top: 0, behavior: 'silent' });
+            },
+            _pageLoaded: function(shouldResetLayout) {
+                this._ensureLazyLoaded();
+            },
+            _ensureLazyLoaded: function() {
+                if (!this.loadComplete) {
+                    Polymer.RenderStatus.afterNextRender(this, function() {
+                        this.importHref(this.resolveUrl('lazy-load.html'), function() {
+                            this.loadComplete = true;
+                            if ('serviceWorker' in navigator) {
+                                navigator.serviceWorker.register('/service-worker.js');
+                            }
+                        });
+                    });
+                }
+            },
 
         });
     </script>
