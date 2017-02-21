@@ -1,6 +1,17 @@
 {
-  "name": "the",
-  "short_name": "the",
-  "start_url": "/",
-  "display": "standalone"
+"name": "the",
+"short_name": "the",
+"start_url": "/",
+"background_color": "#FAFAFA",
+"theme_color": "#FAFAFA",
+"display": "standalone",
+"icons": [{
+    "src": "images/icon-128.png",
+    "sizes": "128x128",
+    "type": "image/png"
+    }, {
+    "src": "images/icon-192.png",
+    "sizes": "192x192",
+    "type": "image/png"
+    }]
 }

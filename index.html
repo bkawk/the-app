@@ -6,6 +6,7 @@
 
     <title>the</title>
     <meta name="description" content="the description">
+     <link rel="shortcut icon" sizes="32x32" href="/images/icon-32.png">
     <link rel="manifest" href="/manifest.json">
     <link rel="import" href="/src/the-app.html">
     <link rel="import" href="/src/shared-styles.html">
@@ -14,7 +15,7 @@
   <body>
     <the-app></the-app>
         <script>
-        //Polymer = {lazyRegister: true, dom: 'shadow'};
+        Polymer = {lazyRegister: true, dom: 'shadow'};
 
         (function() {
             if ('registerElement' in document
