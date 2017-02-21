@@ -3,6 +3,27 @@
     "rules": "database.rules.json"
   },
   "hosting": {
-    "public": "build/bundled"
+    "public": "build/unbundled",
+    "ignore": [
+        "firebase.json",
+        "**/.*"
+    ],
+    "rewrites": [ {
+        "source": "**",
+        "destination": "/index.html"
+    } ],
+    "headers": [ {
+        "source" : "**/bower_components/**",
+        "headers" : [ {
+            "key" : "Cache-Control",
+            "value" : "max-age=3600"
+        } ]
+        },{
+        "source" : "**/*.@(jpg|jpeg|gif|png|svg)",
+        "headers" : [ {
+            "key" : "Cache-Control",
+            "value" : "max-age=7200"
+        } ]
+    } ]
   }
 }
