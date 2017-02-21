@@ -1,0 +1,17 @@
+{
+"entrypoint": "/",
+"shell": "src/the-app.html",
+"fragments": [
+    "src/lazy-load.html"
+],
+"sourceGlobs": [
+"src/**/*",
+"images/**/*",
+"bower.json",
+"index.html"
+],
+"includeDependencies": [
+    "manifest.json",
+    "bower_components/webcomponentsjs/webcomponents-lite.min.js"
+]
+}

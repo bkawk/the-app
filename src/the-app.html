@@ -1,0 +1,29 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="the-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+        font-family: 'Roboto';
+      }
+    </style>
+    <h2>Hello [[prop1]]</h2>
+    <google-analytics key="UA-39334307-18"></google-analytics>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'the-app',
+
+      properties: {
+        prop1: {
+          type: String,
+          value: 'the-app',
+        },
+      },
+
+    });
+  </script>
+</dom-module>

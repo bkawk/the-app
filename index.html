@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>the</title>
+    <meta name="description" content="the description">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="import" href="/src/the-app.html">
+    <link rel="import" href="/src/shared-styles.html">
+
+  </head>
+  <body>
+    <the-app></the-app>
+        <script>
+        //Polymer = {lazyRegister: true, dom: 'shadow'};
+
+        (function() {
+            if ('registerElement' in document
+                && 'import' in document.createElement('link')
+                && 'content' in document.createElement('template')) {
+            } else {
+            var script = document.createElement('script');
+            script.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
+            document.body.appendChild(e);
+            }
+        })();
+    </script>
+  </body>
+</html>
