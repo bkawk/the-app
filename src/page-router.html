@@ -26,36 +26,27 @@
         Polymer({
             is: 'the-app',
             properties: {
-                prop1: {
-                    type: String,
-                    value: 'the-app',
-                },
                 page: {
                     type: String,
-                    observer: '_pageChanged'
+                    observer: '_pageChanged',
+                    value: 'home',
                 },
             },
             observers: [
                 '_routePageChanged(routeData.page)',
             ],
-            ready:function(){
-                console.log(this.route);
-            },
             _pageChanged: function(page, oldPage){
-                console.log("Page Changed" + this.page);
                 var href;
                 switch(page) {
                     case 'about':
-                    href = 'pages/about-page.html';
-                    break;
-                    
+                        href = 'pages/about-page.html';
+                        break;
                     case 'home':
-                    href = 'pages/home-page.html';
-                    break;
-                    
+                        href = 'pages/home-page.html';
+                        break;
                     default:
-                    href = 'pages/home-page.html';
-                    break;
+                        href = 'pages/error-page.html';
+                        break;
                 }
                 this.importHref(
                     this.resolveUrl(href),
@@ -66,7 +57,7 @@
             },
             _routePageChanged: function(page) {
                 if (!page) {
-                    this.set('route.path', 'home');
+                    this.set('route.path', '/');
                     return;
                 }
                 this.page = page;
@@ -87,7 +78,6 @@
                     });
                 }
             },
-
         });
     </script>
 </dom-module>
