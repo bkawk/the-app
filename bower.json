@@ -5,7 +5,8 @@
     "polymer": "Polymer/polymer#^1.4.0",
     "app-layout": "^0.10.7",
     "iron-pages": "^1.0.8",
-    "app-route": "PolymerElements/app-route#^0.9.3"
+    "app-route": "PolymerElements/app-route#^0.9.3",
+    "polymerfire": "^0.10.3"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

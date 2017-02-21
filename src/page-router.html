@@ -3,6 +3,7 @@
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-app.html">
 
 <dom-module id="the-app">
     <template>
@@ -12,6 +13,12 @@
             font-family: 'Roboto';
             }
         </style>
+        <firebase-app
+            name="holdingdemo"
+            api-key="AIzaSyAhoCXxkY-ffNwA_7L7HIwBVpASYj1btNE"
+            auth-domain="convoo-login-demo.firebaseapp.com"
+            database-url="https://convoo-login-demo.firebaseio.com">
+        </firebase-app>
         <h2>Hello [[prop1]] - [[route.path]] </h2>
         <google-analytics key="UA-39334307-18"></google-analytics>
         <app-location route="{{route}}"></app-location>
@@ -36,6 +43,7 @@
                 '_routePageChanged(routeData.page)',
             ],
             _pageChanged: function(page, oldPage){
+                console.log(page);
                 var href;
                 switch(page) {
                     case 'about':
@@ -46,8 +54,8 @@
                         break;
                     default:
                         href = 'pages/error-page.html';
-                        break;
                 }
+                console.log(href);
                 this.importHref(
                     this.resolveUrl(href),
                     this._pageLoaded.bind(this, Boolean(oldPage)),
