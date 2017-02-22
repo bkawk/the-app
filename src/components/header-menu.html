@@ -1,0 +1,24 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="header-menu">
+
+<template>
+    <content>
+    </content>
+</template>
+
+<script>
+    Polymer({
+        is: 'header-menu',
+        properties: {
+            mobile: {
+                type: Boolean
+            }
+        },
+        _toggleDrawer: function() {
+            this.drawerOpened = !this.drawerOpened;
+        },
+    });
+</script>
+
+</dom-module>
