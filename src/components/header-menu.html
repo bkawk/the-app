@@ -93,12 +93,15 @@
             }
         },
         _openDropDown: function(){
+            clearTimeout(this.timer);
             this.customStyle['--drop-down-display'] = 'block';
             this.updateStyles();      
         },
         _closeDropDown: function(){
-            this.customStyle['--drop-down-display'] = 'none';
-            this.updateStyles();      
+            this.timer = setTimeout(function(){ 
+                this.customStyle['--drop-down-display'] = 'none';
+                this.updateStyles();   
+            }.bind(this), 400);
         }
     });
 </script>
