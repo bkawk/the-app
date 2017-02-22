@@ -5,7 +5,6 @@
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 
-
 <dom-module id="header-component">
 
 <template>
@@ -18,14 +17,31 @@
         background-color: var(--secondary-background-color);
         height: var(--toolbar-height);
     }
-
+    .fixed-width{
+        width: 100%;
+        margin: auto;
+        max-width: var(--app-fixed-width);
+        height: var(--toolbar-height);
+        @apply(--layout-horizontal);
+        @apply(--layout-center);
+    }
+    .flexchild {
+        @apply(--layout-flex);
+    }
+    @media screen and (max-width: 415px) {
+        .flexchild {
+            text-align: center;
+        }
+    }
     </style>
     <app-toolbar class="toolbar">
-        <template is="dom-if" if="{{mobile}}">
-            <paper-icon-button icon="menu" flat on-click="_toggleDrawer"></paper-icon-button>
-        </template>
-        <div main-title>App name</div>
-        <paper-icon-button icon="close" flat></paper-icon-button>
+        <div class="fixed-width">
+                <template is="dom-if" if="{{mobile}}">
+                    <paper-icon-button icon="menu" flat on-click="_toggleDrawer"></paper-icon-button>
+                </template>
+                <div class="flexchild">App name</div>
+                <paper-icon-button icon="close" flat></paper-icon-button>
+        </div>
     </app-toolbar>
 </template>
 
