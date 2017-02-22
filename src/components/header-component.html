@@ -26,10 +26,14 @@
         @apply(--layout-center);
     }
     .flexchild {
+        height: 19px;
+        overflow: hidden;
         @apply(--layout-flex);
     }
     @media screen and (max-width: 415px) {
         .flexchild {
+            height: 19px;
+            overflow: hidden;
             text-align: center;
         }
     }
@@ -39,7 +43,7 @@
                 <template is="dom-if" if="{{mobile}}">
                     <paper-icon-button icon="menu" flat on-click="_toggleDrawer"></paper-icon-button>
                 </template>
-                <div class="flexchild">App name</div>
+                <div class="flexchild"><img src="../../images/logo.svg"></div>
                 <paper-icon-button icon="close" flat></paper-icon-button>
         </div>
     </app-toolbar>
