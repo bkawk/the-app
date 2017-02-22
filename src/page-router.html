@@ -4,29 +4,47 @@
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/polymerfire/firebase-app.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="components/header-component.html">
+<link rel="import" href="components/drawer-component.html">
 
 <dom-module id="the-app">
     <template>
         <style>
             :host {
             display: block;
-            font-family: 'Roboto';
             }
         </style>
+
         <firebase-app
-            name="holdingdemo"
-            api-key="AIzaSyAhoCXxkY-ffNwA_7L7HIwBVpASYj1btNE"
-            auth-domain="convoo-login-demo.firebaseapp.com"
-            database-url="https://convoo-login-demo.firebaseio.com">
+            name="the-app-firebase"
+            api-key="AIzaSyBMogvHVn9zNl_pKt0ZNlOm4CDQN80e4go"
+            auth-domain="the-app-4e238.firebaseapp.com"
+            database-url="https://the-app-4e238.firebaseio.com/"
+            storage-bucket="the-app-4e238.appspot.com",
+            messaging-sender-id="916383740318">
         </firebase-app>
-        <h2>Hello [[prop1]] - [[route.path]] </h2>
-        <google-analytics key="UA-39334307-18"></google-analytics>
-        <app-location route="{{route}}"></app-location>
-        <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
-        <iron-pages role="main" selected="[[page]]" attr-for-selected="name" fallback-selection="path-warning">
-                <home-page id="home" name="home" route="[[subroute]]"></home-page>
-                <about-page id="about" name="about" route="[[subroute]]"></home-page>
-        </iron-pages>
+
+        <app-drawer-layout force-narrow>
+            <app-drawer swipe-open opened="{{drawerOpened}}">
+                <drawer-component></drawer-component>
+            </app-drawer>
+            <app-header-layout>
+                <app-header fixed condenses effects="waterfall">
+                    <header-component drawer-opened={{drawerOpened}}></header-component>
+                </app-header>
+                <analytics-component key="UA-39334307-18"></analytics-component>
+                <app-location route="{{route}}"></app-location>
+                <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
+                <iron-pages role="main" selected="[[page]]" attr-for-selected="name" fallback-selection="path-warning">
+                        <home-page id="home" name="home" route="[[subroute]]"></home-page>
+                        <about-page id="about" name="about" route="[[subroute]]"></home-page>
+                </iron-pages>
+            </app-header-layout>
+        </app-drawer-layout>
     </template>
 
     <script>
@@ -43,7 +61,6 @@
                 '_routePageChanged(routeData.page)',
             ],
             _pageChanged: function(page, oldPage){
-                console.log(page);
                 var href;
                 switch(page) {
                     case 'about':
@@ -55,7 +72,6 @@
                     default:
                         href = 'pages/error-page.html';
                 }
-                console.log(href);
                 this.importHref(
                     this.resolveUrl(href),
                     this._pageLoaded.bind(this, Boolean(oldPage)),
@@ -64,6 +80,7 @@
 
             },
             _routePageChanged: function(page) {
+                this.drawerOpened = false;
                 if (!page) {
                     this.set('route.path', '/');
                     return;

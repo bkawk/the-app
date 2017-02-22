@@ -1,0 +1,23 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="drawer-component">
+
+<template>
+
+</template>
+
+<script>
+    Polymer({
+        is: 'drawer-component',
+        properties: {
+            mobile: {
+                type: Boolean
+            }
+        },
+        _toggleDrawer: function() {
+            this.drawerOpened = !this.drawerOpened;
+        },
+    });
+</script>
+
+</dom-module>

@@ -1,5 +1,6 @@
 {
   "projects": {
-    "the-app": "polymer-base-5dec1"
+    "the-app": "polymer-base-5dec1",
+    "default": "the-app-4e238"
   }
 }
