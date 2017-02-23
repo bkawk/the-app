@@ -66,13 +66,13 @@
                 },
                 mobile:{
                     type: Boolean,
-                    observer: '_email',
+                    observer: '_mobile',
                 }
             },
             observers: [
                 '_routePageChanged(routeData.page)',
             ],
-            _email: function(){
+            _mobile: function(){
                 var header = this.$.appHeader;
                 if(this.mobile){
                     header.fixed = false;
