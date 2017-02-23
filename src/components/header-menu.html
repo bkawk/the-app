@@ -7,12 +7,12 @@
     <style is="custom-style">
         :host {
             display: block;
-            width: 80px;
+            white-space: nowrap;
         }
         iron-icon{
             position: relative;
-            top: -2px;
-            left: -6px;
+            top: 12px;
+            left: 3px;
         }
         .drop-down-container{
             display: var(--drop-down-display, none);
@@ -55,9 +55,9 @@
 
         .drop-down{
             padding: 15px 15px 0px 15px;
-            position: relative;
+            position: absolute;
             top: -7px;
-            left: var(--drop-down-left, -70px);
+            right: 0px;
             background-color: white;
             width: var(--drop-down-width, 110px);
             height: auto;
@@ -67,21 +67,26 @@
             box-shadow: 0px 1px 6px 0px rgba(50, 50, 50, 0.3);
             @apply(--layout-horizontal);
             @apply(--layout-wrap);
-            
+        }
+        .container{
+            @apply(--layout-horizontal);
+            width: 100%;
         }
         .item{
-            width: 100px;
+            width: 110px;
             height: 30px;
             font-weight: 300;
             line-height: 15px;
         }
     </style>
 
-    <div on-tap="_openDropDown" on-mouseover="_openDropDown" on-mouseleave="_closeDropDown">
-    <content></content>
-    <iron-icon icon="arrow-drop-down"></iron-icon>
+    <div on-tap="_openDropDown" on-mouseover="_openDropDown" on-mouseleave="_closeDropDown" class="container">
+        <content></content>
+        <template is="dom-if" if="{{caret}}">
+            <iron-icon icon="arrow-drop-down"></iron-icon>
+        </template>
     </div>
-    <dic class$="{{animate}} drop-down-container ">
+    <dic class$="{{animate}} drop-down-container">
         <div class="drop-down" on-mouseleave="_closeDropDown" on-mouseover="_openDropDown">
             <template is="dom-repeat" items="{{optionsArray}}">
                 <div class="item" on-tap="_selected" id="{{item}}">{{item}}</div>
@@ -111,7 +116,15 @@
                 type: String,
                 notify: true,
                 reflectToAttribute: true
+            },
+            caret:{
+                type: Boolean,
+                value: false,
             }
+        },
+        _width: function(){
+            this.customStyle['--button-width'] = this.width;
+            this.updateStyles();
         },
         _selected: function(e){
             this.selected = e.target.id;
@@ -129,7 +142,6 @@
         _columns: function() {
             if(this.columns == 2){
                 this.customStyle['--drop-down-width'] = '220px';
-                this.customStyle['--drop-down-left'] = '-180px';
                 this.updateStyles();
             }
         },

@@ -61,7 +61,17 @@
                 <div class="flexchild"><img src="../../images/logo.svg"></div>
                 <a href="#" class="header-button">Join The App</a>
                 <a href="#" class="header-button">Log In</a>
-                <header-menu options="This, That, The Other" selected="{{selected}}" columns="2">Options</header-menu>                
+                <header-menu 
+                    options="This, That, The Other" 
+                    selected="{{selected}}" 
+                    columns="1" 
+                    caret>Log In</header-menu>     
+                <header-menu 
+                    options="Profile, Settings, Log Out" 
+                    selected="{{selected}}" 
+                    columns="1">
+                    <img src="https://pbs.twimg.com/profile_images/741290730170122240/abfazODg_normal.jpg" style="width:30px; height:30px; border-radius: 50%; margin-top: 11px; margin-bottom: 11px;">
+                </header-menu>                
         </div>
     </app-toolbar>
 </template>
