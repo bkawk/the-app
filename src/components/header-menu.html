@@ -18,9 +18,15 @@
             display: var(--drop-down-display, none);
         }
 
-        .animate{
+        .animateIn{
             opacity: 0;
             animation: 0.1s fadeIn;
+            animation-fill-mode: forwards;
+            position: relative;
+        }
+        .animateOut{
+            opacity: 0;
+            animation: 0.1s fadeOut;
             animation-fill-mode: forwards;
             position: relative;
         }
@@ -33,6 +39,16 @@
             100% {
                 opacity: 1;
                 top: 0px;
+            }
+        }
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+                top: 0px;
+            }
+            100% {
+                opacity: 0;
+                top: -20px;
             }
         }
 
@@ -99,8 +115,11 @@
         },
         _selected: function(e){
             this.selected = e.target.id;
-            this.customStyle['--drop-down-display'] = 'none';
-            this.updateStyles();  
+            this.animate = 'animateOut'
+            this.timer = setTimeout(function(){ 
+                this.customStyle['--drop-down-display'] = 'none';
+                this.updateStyles();
+            }.bind(this), 400); 
         },
         _options: function(){
             this.optionsArray = this.options.split(',');
@@ -114,11 +133,12 @@
         },
         _openDropDown: function(){
             clearTimeout(this.timer);
-            this.animate = 'animate'
+            this.animate = 'animateIn'
             this.customStyle['--drop-down-display'] = 'block';
             this.updateStyles();      
         },
         _closeDropDown: function(){
+            this.animate = 'animateOut'
             this.timer = setTimeout(function(){ 
                 this.customStyle['--drop-down-display'] = 'none';
                 this.updateStyles();   
