@@ -11,8 +11,10 @@
 <link rel="import" href="components/header-component.html">
 <link rel="import" href="components/drawer-component.html">
 
+
 <dom-module id="the-app">
     <template>
+        <iron-media-query query="max-width: 415px" query-matches="{{mobile}}"></iron-media-query>
         <style>
             :host {
             display: block;
@@ -39,8 +41,8 @@
                 <drawer-component></drawer-component>
             </app-drawer>
             <app-header-layout>
-                <app-header fixed condenses effects="waterfall">
-                    <header-component drawer-opened={{drawerOpened}}></header-component>
+                <app-header fixed condenses effects="waterfall" id="appHeader">
+                    <header-component drawer-opened={{drawerOpened}} route="{{route}}"></header-component>
                 </app-header>
                 <analytics-component key="UA-39334307-18"></analytics-component>
                 <app-location route="{{route}}"></app-location>
@@ -62,10 +64,22 @@
                     observer: '_pageChanged',
                     value: 'home',
                 },
+                mobile:{
+                    type: Boolean,
+                    observer: '_email',
+                }
             },
             observers: [
                 '_routePageChanged(routeData.page)',
             ],
+            _email: function(){
+                var header = this.$.appHeader;
+                if(this.mobile){
+                    header.fixed = false;
+                } else {
+                    header.fixed = true;
+                }
+            },
             _pageChanged: function(page, oldPage){
                 var href;
                 switch(page) {

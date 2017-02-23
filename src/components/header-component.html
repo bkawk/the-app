@@ -49,6 +49,7 @@
             height: 19px;
             overflow: hidden;
             text-align: center;
+            padding-right: 50px;
         }
     }
 
@@ -59,19 +60,23 @@
                     <paper-icon-button icon="menu" flat on-click="_toggleDrawer"></paper-icon-button>
                 </template>
                 <div class="flexchild"><img src="../../images/logo.svg"></div>
-                <a href="#" class="header-button">Join The App</a>
-                <a href="#" class="header-button">Log In</a>
-                <header-menu 
-                    options="This, That, The Other" 
+                <template is="dom-if" if="{{!mobile}}">
+                    <a href="#" class="header-button" on-tap="_join">Join The App</a>
+                    <a href="#" class="header-button" on-tap="_logIn">Log In</a>
+                    <header-menu 
+                    options="English, American, Chinese" 
                     selected="{{selected}}" 
                     columns="1" 
-                    caret>Log In</header-menu>     
-                <header-menu 
+                    caret>Languages</header-menu>
+                </template>
+
+                <!--<header-menu 
                     options="Profile, Settings, Log Out" 
                     selected="{{selected}}" 
                     columns="1">
                     <img src="https://pbs.twimg.com/profile_images/741290730170122240/abfazODg_normal.jpg" style="width:30px; height:30px; border-radius: 50%; margin-top: 11px; margin-bottom: 11px;">
-                </header-menu>                
+                </header-menu>   -->
+
         </div>
     </app-toolbar>
 </template>
@@ -86,10 +91,21 @@
             drawerOpened: {
                 type: Boolean,
                 notify: true
+            },
+            route:{
+                type: Object,
+                notify: true,
+                reflectToAttribute: true
             }
         },
         _toggleDrawer: function() {
             this.drawerOpened = !this.drawerOpened;
+        },
+        _join: function() {
+            // open modal
+        },
+        _logIn: function() {
+            // open modal
         },
     });
 </script>
