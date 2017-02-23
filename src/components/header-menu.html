@@ -20,13 +20,13 @@
 
         .animateIn{
             opacity: 0;
-            animation: 0.1s fadeIn;
+            animation: 200ms fadeIn;
             animation-fill-mode: forwards;
             position: relative;
         }
         .animateOut{
             opacity: 0;
-            animation: 0.1s fadeOut;
+            animation: 200ms fadeOut;
             animation-fill-mode: forwards;
             position: relative;
         }
@@ -115,11 +115,13 @@
         },
         _selected: function(e){
             this.selected = e.target.id;
-            this.animate = 'animateOut'
             this.timer = setTimeout(function(){ 
-                this.customStyle['--drop-down-display'] = 'none';
-                this.updateStyles();
-            }.bind(this), 400); 
+                this.animate = 'animateOut'
+                this.timer = setTimeout(function(){ 
+                    this.customStyle['--drop-down-display'] = 'none';
+                    this.updateStyles();
+                }.bind(this), 200); 
+            }.bind(this), 200); 
         },
         _options: function(){
             this.optionsArray = this.options.split(',');
@@ -137,12 +139,14 @@
             this.customStyle['--drop-down-display'] = 'block';
             this.updateStyles();      
         },
-        _closeDropDown: function(){
-            this.animate = 'animateOut'
+        _closeDropDown: function(){   
             this.timer = setTimeout(function(){ 
-                this.customStyle['--drop-down-display'] = 'none';
-                this.updateStyles();   
-            }.bind(this), 400);
+                this.animate = 'animateOut'
+                this.timer = setTimeout(function(){ 
+                    this.customStyle['--drop-down-display'] = 'none';
+                    this.updateStyles();
+                }.bind(this), 200);  
+            }.bind(this), 200);
         }
     });
 </script>
