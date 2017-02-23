@@ -17,6 +17,26 @@
         .drop-down-container{
             display: var(--drop-down-display, none);
         }
+
+        .animate{
+            opacity: 0;
+            animation: 0.1s fadeIn;
+            animation-fill-mode: forwards;
+            position: relative;
+        }
+        
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                top: -20px;
+            }
+            100% {
+                opacity: 1;
+                top: 0px;
+            }
+        }
+
+
         .drop-down{
             padding: 15px 15px 0px 15px;
             position: relative;
@@ -45,7 +65,7 @@
     <content></content>
     <iron-icon icon="arrow-drop-down"></iron-icon>
     </div>
-    <dic class="drop-down-container">
+    <dic class$="{{animate}} drop-down-container ">
         <div class="drop-down" on-mouseleave="_closeDropDown" on-mouseover="_openDropDown">
             <template is="dom-repeat" items="{{optionsArray}}">
                 <div class="item" on-tap="_selected" id="{{item}}">{{item}}</div>
@@ -94,6 +114,7 @@
         },
         _openDropDown: function(){
             clearTimeout(this.timer);
+            this.animate = 'animate'
             this.customStyle['--drop-down-display'] = 'block';
             this.updateStyles();      
         },
