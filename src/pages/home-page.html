@@ -1,25 +1,32 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
 <dom-module id="home-page">
 
-  <template>
+<template>
 
     <style>
-      :host {
+    :host {
         display: block;
-      }
+    }
     </style>
     <h1>Home</h1></br>{{localize('join')}}</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
-  </template>
+</template>
 
-  <script>
+<script>
     Polymer({
-      is: 'home-page',
-      properties: {
-        item: {
-          type: Object
-        }
-      }
+        is: 'home-page',
+        behaviors: [
+            Polymer.AppLocalizeBehavior
+        ],
+        properties: {
+            item: {
+            type: Object
+            }
+        },
+        attached: function() {
+            this.loadResources(this.resolveUrl('../locales.json'));
+        },
     });
-  </script>
+</script>
 
 </dom-module>

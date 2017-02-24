@@ -61,7 +61,7 @@
                 </template>
                 <div class="flexchild"><img src="../../images/logo.svg"></div>
                 <template is="dom-if" if="{{!mobile}}">
-                    <a href="#" class="header-button" on-tap="_join">{{localize('join')}}</a>
+                    <a href="#" class="header-button" on-tap="_join">{{localize('join')}} </a>
                     <a href="#" class="header-button" on-tap="_logIn">{{localize('login')}}</a>
                     <header-menu 
                     options="English,中文" 
@@ -90,7 +90,9 @@
         properties: {
             language: {
                 type: String,
-                observer: '_language'
+                observer: '_language',
+                notify: true,
+                reflectToAttribute: true
             },
             mobile: {
                 type: Boolean

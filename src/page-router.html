@@ -41,14 +41,14 @@
             </app-drawer>
             <app-header-layout>
                 <app-header fixed condenses effects="waterfall" id="appHeader">
-                    <header-component drawer-opened={{drawerOpened}} route="{{route}}"></header-component>
+                    <header-component drawer-opened={{drawerOpened}} route="{{route}}" language="{{language}}"></header-component>
                 </app-header>
                 <analytics-component key="UA-39334307-18"></analytics-component>
                 <app-location route="{{route}}"></app-location>
                 <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
                 <iron-pages role="main" selected="[[page]]" attr-for-selected="name" fallback-selection="path-warning">
-                        <home-page id="home" name="home" route="[[subroute]]"></home-page>
-                        <about-page id="about" name="about" route="[[subroute]]"></home-page>
+                        <home-page id="home" name="home" route="[[subroute]]" language="[[language]]"></home-page>
+                        <about-page id="about" name="about" route="[[subroute]]" language="[[language]]"></home-page>
                 </iron-pages>
             </app-header-layout>
         </app-drawer-layout>
