@@ -4,6 +4,7 @@
 <link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
 <link rel="import" href="header-menu.html">
 
 
@@ -61,13 +62,13 @@
                 </template>
                 <div class="flexchild"><img src="../../images/logo.svg"></div>
                 <template is="dom-if" if="{{!mobile}}">
-                    <a href="#" class="header-button" on-tap="_join">Join The App</a>
-                    <a href="#" class="header-button" on-tap="_logIn">Log In</a>
+                    <a href="#" class="header-button" on-tap="_join">{{localize('join')}}</a>
+                    <a href="#" class="header-button" on-tap="_logIn">{{localize('login')}}</a>
                     <header-menu 
-                    options="English, American, Chinese" 
-                    selected="{{selected}}" 
+                    options="English,Chinese" 
+                    selected="{{language}}" 
                     columns="1" 
-                    caret>Languages</header-menu>
+                    caret>{{localize('languages')}}</header-menu>
                 </template>
 
                 <!--<header-menu 
@@ -84,7 +85,14 @@
 <script>
     Polymer({
         is: 'header-component',
+        behaviors: [
+            Polymer.AppLocalizeBehavior
+        ],
         properties: {
+            language: {
+                type: String,
+                value: 'English'
+            },
             mobile: {
                 type: Boolean
             },
@@ -97,6 +105,10 @@
                 notify: true,
                 reflectToAttribute: true
             }
+        },
+
+        attached: function() {
+            this.loadResources(this.resolveUrl('../locales.json'));
         },
         _toggleDrawer: function() {
             this.drawerOpened = !this.drawerOpened;
