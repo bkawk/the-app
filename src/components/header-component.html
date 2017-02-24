@@ -50,7 +50,6 @@
             height: 19px;
             overflow: hidden;
             text-align: center;
-            padding-right: 50px;
         }
     }
 
@@ -65,7 +64,7 @@
                     <a href="#" class="header-button" on-tap="_join">{{localize('join')}}</a>
                     <a href="#" class="header-button" on-tap="_logIn">{{localize('login')}}</a>
                     <header-menu 
-                    options="English,Chinese" 
+                    options="English,中文" 
                     selected="{{language}}" 
                     columns="1" 
                     caret>{{localize('languages')}}</header-menu>
@@ -91,7 +90,7 @@
         properties: {
             language: {
                 type: String,
-                value: 'English'
+                observer: '_language'
             },
             mobile: {
                 type: Boolean
@@ -109,6 +108,20 @@
 
         attached: function() {
             this.loadResources(this.resolveUrl('../locales.json'));
+            this._language();
+        },
+        _language: function(){
+            if(this.language){
+                window.localStorage.setItem("language", this.language);
+            } else {
+                var language = window.localStorage.getItem("language");
+                if(language){
+                    this.language = language;
+                } else {
+                    window.localStorage.setItem("language", "English");
+                    this.language = "English"
+                }        
+            }
         },
         _toggleDrawer: function() {
             this.drawerOpened = !this.drawerOpened;
