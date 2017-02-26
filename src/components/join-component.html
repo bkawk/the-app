@@ -24,17 +24,39 @@
             @apply(--layout-horizontal);
             @apply(--layout-center); 
         }
+        .overlay-out{
+            animation: fadeout 0.3s;
+            animation-fill-mode: forwards;
+        }
+        .outer-container{
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            left: 0px;
+            bottom: 0px;
+            z-index: 1000;
+            opacity: 1;
+            cursor: pointer;
+            @apply(--layout-horizontal);
+            @apply(--layout-center); 
+        }
         .container{
+            padding: 16px;
             position: relative;
             width: 410px;
             height: 470px;
             background-color: white;
-            z-index: 1000;
+            z-index: 1001;
             opacity: 1;
             animation: fadeup 0.4s;
             animation-fill-mode: forwards;
             margin: auto;
             border-radius: 2px;
+            cursor: default;
+        }
+        .container-out{
+            animation: fadedown 0.4s;
+            animation-fill-mode: forwards;
         }
         @keyframes fadein {
             from { opacity: 0; }
@@ -50,8 +72,28 @@
                 top: 0px;
                 }
         }
+        @keyframes fadeout {
+            from { opacity: 1; }
+            to  { opacity: 0; }
+        }
+        @keyframes fadedown {
+            from { 
+                opacity: 1;
+                top: 0px;
+                }
+            to  { 
+                opacity: 0;
+                top: 30px;
+                }
+        }
     </style>
-    <div class="overlay" on-tap="_close"><div class="container"></div></div>
+    <div class="outer-container" on-tap="_close">
+        <div class="container" onclick="event.stopPropagation()" id="container">
+            <h2>{{localize('join')}}</h2>
+        </div>
+    </div>
+    <div class="overlay" id="overlay"></div>
+
 </template>
 
 <script>
@@ -66,12 +108,24 @@
         properties: {
             mobile: {
                 type: Boolean
-            }
+            },
+            language: {
+                type: String,
+                statePath: 'language',
+            },
+        },
+        attached: function() {
+            this.loadResources(this.resolveUrl('../locales.json'));
         },
         _close: function(){
-            this.dispatch('JOIN_MODAL', false);
+            this.toggleClass('container-out', true, this.$.container);
+            this.toggleClass('overlay-out', true, this.$.overlay);
+            setTimeout(function(){ 
+                this.toggleClass('container-out', false, this.$.container);
+                this.toggleClass('overlay-out', false, this.$.overlay);
+                this.dispatch('JOIN_MODAL', false);
+            }.bind(this), 300);  
         },
-
     });
 </script>
 
