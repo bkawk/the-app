@@ -105,7 +105,7 @@
                 type: Object,
                 notify: true,
                 reflectToAttribute: true
-            }
+            },
         },
 
         attached: function() {
@@ -129,7 +129,7 @@
             this.drawerOpened = !this.drawerOpened;
         },
         _join: function() {
-            // open modal
+            this.fire('modal', {name: 'join', action: "open"});
         },
         _logIn: function() {
             // open modal

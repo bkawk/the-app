@@ -10,7 +10,7 @@
 <link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 <link rel="import" href="components/header-component.html">
 <link rel="import" href="components/drawer-component.html">
-
+<link rel="import" href="components/join-component.html">
 
 <dom-module id="the-app">
     <template>
@@ -23,9 +23,12 @@
                 width: 100%;
                 margin: auto;
                 max-width: var(--app-fixed-width);
+                padding: 0 16px;
             }
+
         </style>
 
+<!--Firebase-->
         <firebase-app
             name="the-app-firebase"
             api-key="AIzaSyBMogvHVn9zNl_pKt0ZNlOm4CDQN80e4go"
@@ -34,18 +37,29 @@
             storage-bucket="the-app-4e238.appspot.com",
             messaging-sender-id="916383740318">
         </firebase-app>
-
+<!--Modals-->    
+        <template is="dom-if" if="{{joinmodal}}">
+                <join-component></join-component>
+        </template>
+<!--Layout-->
         <app-drawer-layout force-narrow>
             <app-drawer swipe-open opened="{{drawerOpened}}">
                 <drawer-component></drawer-component>
             </app-drawer>
             <app-header-layout>
                 <app-header fixed condenses effects="waterfall" id="appHeader">
-                    <header-component drawer-opened={{drawerOpened}} route="{{route}}" language="{{language}}"></header-component>
+                    <header-component 
+                        drawer-opened={{drawerOpened}} 
+                        route="{{route}}" 
+                        language="{{language}}"
+                        show-join-modal="{{show-join-modal}}"
+                        show-log-in="{{show-log-in}}">
+                    </header-component>
                 </app-header>
                 <analytics-component key="UA-39334307-18"></analytics-component>
                 <app-location route="{{route}}"></app-location>
                 <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
+<!--Pages-->
                 <iron-pages role="main" selected="[[page]]" attr-for-selected="name" fallback-selection="path-warning">
                         <home-page id="home" name="home" route="[[subroute]]" language="[[language]]"></home-page>
                         <about-page id="about" name="about" route="[[subroute]]" language="[[language]]"></home-page>
@@ -71,6 +85,9 @@
             observers: [
                 '_routePageChanged(routeData.page)',
             ],
+            tester: function(){
+                console.log("Yes");
+            },
             _mobile: function(){
                 var header = this.$.appHeader;
                 if(this.mobile){
@@ -122,5 +139,14 @@
                 }
             },
         });
+
+    document.querySelector('the-app').addEventListener('modal', function (event) {
+        if( event.detail.name == 'join' && event.detail.action == 'close'){
+            this.joinmodal = false
+        }
+        if( event.detail.name == 'join' && event.detail.action == 'open'){
+            this.joinmodal = true
+        }
+    })
     </script>
 </dom-module>
