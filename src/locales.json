@@ -2,12 +2,16 @@
     "English": {
         "login": "Log In",
         "join": "Join TheApp",
-        "languages": "English"
+        "languages": "English",
+        "intro": "TheApp allows you to quickly scaffold a Polymer app",
+        "already": "Already on TheApp?"
         },
         
     "中文": {
         "login": "登录",
         "join": "注册",
-        "languages": "语言"
+        "languages": "语言",
+        "intro":"该应用程序允许您快速构建Polymer应用程序",
+        "already": "已经在应用程序"
         }
 }
