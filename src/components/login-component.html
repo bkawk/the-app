@@ -3,7 +3,7 @@
 <link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
 <link rel="import" href="../redux-store.html">
 
-<dom-module id="join-component">
+<dom-module id="login-component">
 
 <template>
     <style is="custom-style">
@@ -96,7 +96,7 @@
     </style>
     <div class="outer-container" on-tap="_close">
         <div class="container" onclick="event.stopPropagation()" id="container">
-            <h2>{{localize('join')}}</h2>
+            <h2>{{localize('login')}}</h2>
         </div>
     </div>
     <div class="overlay" id="overlay"></div>
@@ -105,11 +105,11 @@
 
 <script>
     Polymer({
-        is: 'join-component',
+        is: 'login-component',
         behaviors: [ ReduxBehavior, Polymer.AppLocalizeBehavior ],
         actions: {
-            JOIN_MODAL: function(joinModal){
-                return { type: 'JOIN_MODAL', joinModal: joinModal}
+            LOGIN_MODAL: function(loginModal){
+                return { type: 'LOGIN_MODAL', loginModal: loginModal}
             }
         },
         properties: {
@@ -130,7 +130,7 @@
             setTimeout(function(){ 
                 this.toggleClass('container-out', false, this.$.container);
                 this.toggleClass('overlay-out', false, this.$.overlay);
-                this.dispatch('JOIN_MODAL', false);
+                this.dispatch('LOGIN_MODAL', false);
             }.bind(this), 300);  
         },
     });
