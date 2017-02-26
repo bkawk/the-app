@@ -43,11 +43,11 @@
             @apply(--layout-center); 
         }
         .container{
-            padding: 30px 45px;
+            padding: 20px 45px;
             position: relative;
-            width: 410px;
-            height: 470px;
-            background-color: white;
+            width: var(--modal-width);
+            height: auto;
+            background-color: var(--modal-bacground-color);
             z-index: 1001;
             opacity: 1;
             animation: fadeup 0.4s;
@@ -96,7 +96,7 @@
     </style>
     <div class="outer-container" on-tap="_close">
         <div class="container" onclick="event.stopPropagation()" id="container">
-            <h2>{{localize('login')}}</h2>
+            <h3>{{localize('login')}}</h3>
         </div>
     </div>
     <div class="overlay" id="overlay"></div>

@@ -1,5 +1,6 @@
 {
     "English": {
+        "name": "TheApp",
         "login": "Log In",
         "join": "Join TheApp",
         "languages": "English",
@@ -8,6 +9,7 @@
         },
         
     "中文": {
+        "name": "该应",
         "login": "登录",
         "join": "注册",
         "languages": "语言",

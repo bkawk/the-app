@@ -43,11 +43,11 @@
             @apply(--layout-center); 
         }
         .container{
-            padding: 30px 45px;
+            padding: 20px 45px;
             position: relative;
-            width: 410px;
-            height: 470px;
-            background-color: white;
+            width: var(--modal-width);
+            height: auto;
+            background-color: var(--modal-bacground-color);
             z-index: 1001;
             opacity: 1;
             animation: fadeup 0.4s;
@@ -64,6 +64,14 @@
             animation: fadedown 0.4s;
             transition-timing-function: ease-in;
             animation-fill-mode: forwards;
+        }
+        .small {
+            color: #82858c;
+            font-size: 15px; 
+            font-weight: normal; 
+            line-height: 20px; 
+            display: block; 
+            padding-top: 13px; 
         }
         @keyframes fadein {
             from { opacity: 0; }
@@ -97,6 +105,7 @@
     <div class="outer-container" on-tap="_close">
         <div class="container" onclick="event.stopPropagation()" id="container">
             <h2>{{localize('join')}}</h2>
+            <small class="small">{{localize('intro')}}</small>
         </div>
     </div>
     <div class="overlay" id="overlay"></div>
