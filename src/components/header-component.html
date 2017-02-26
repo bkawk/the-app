@@ -5,6 +5,7 @@
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
+<link rel="import" href="../redux-store.html">
 <link rel="import" href="header-menu.html">
 
 
@@ -84,15 +85,23 @@
 <script>
     Polymer({
         is: 'header-component',
-        behaviors: [
-            Polymer.AppLocalizeBehavior
-        ],
+        behaviors: [ ReduxBehavior, Polymer.AppLocalizeBehavior ],
+        actions: {
+            LANGUAGE: function(language){
+                return { type: 'LANGUAGE', language: language}
+            },
+            JOIN_MODAL: function(joinModal){
+                return { type: 'JOIN_MODAL', joinModal: joinModal}
+            },
+            LOGIN_MODAL: function(loginModal){
+                return { type: 'LOGIN_MODAL', loginModal: loginModal}
+            }
+        },
         properties: {
             language: {
                 type: String,
+                statePath: 'language',
                 observer: '_language',
-                notify: true,
-                reflectToAttribute: true
             },
             mobile: {
                 type: Boolean
@@ -113,15 +122,18 @@
             this._language();
         },
         _language: function(){
+            this.dispatch('LANGUAGE', this.language);
             if(this.language){
                 window.localStorage.setItem("language", this.language);
             } else {
                 var language = window.localStorage.getItem("language");
                 if(language){
                     this.language = language;
+                    this.dispatch('LANGUAGE', this.language);
                 } else {
                     window.localStorage.setItem("language", "English");
                     this.language = "English"
+                    this.dispatch('LANGUAGE', this.language);
                 }        
             }
         },
@@ -129,10 +141,10 @@
             this.drawerOpened = !this.drawerOpened;
         },
         _join: function() {
-            this.fire('modal', {name: 'join', action: "open"});
+            this.dispatch('JOIN_MODAL', true);
         },
         _logIn: function() {
-            // open modal
+            this.dispatch('LOGIN_MODAL', true);
         },
     });
 </script>

@@ -11,6 +11,7 @@
 <link rel="import" href="components/header-component.html">
 <link rel="import" href="components/drawer-component.html">
 <link rel="import" href="components/join-component.html">
+<link rel="import" href="redux-store.html">
 
 <dom-module id="the-app">
     <template>
@@ -38,7 +39,7 @@
             messaging-sender-id="916383740318">
         </firebase-app>
 <!--Modals-->    
-        <template is="dom-if" if="{{joinmodal}}">
+        <template is="dom-if" if="{{joinModal}}">
                 <join-component></join-component>
         </template>
 <!--Layout-->
@@ -51,7 +52,6 @@
                     <header-component 
                         drawer-opened={{drawerOpened}} 
                         route="{{route}}" 
-                        language="{{language}}"
                         show-join-modal="{{show-join-modal}}"
                         show-log-in="{{show-log-in}}">
                     </header-component>
@@ -61,8 +61,8 @@
                 <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
 <!--Pages-->
                 <iron-pages role="main" selected="[[page]]" attr-for-selected="name" fallback-selection="path-warning">
-                        <home-page id="home" name="home" route="[[subroute]]" language="[[language]]"></home-page>
-                        <about-page id="about" name="about" route="[[subroute]]" language="[[language]]"></home-page>
+                        <home-page id="home" name="home" route="[[subroute]]"></home-page>
+                        <about-page id="about" name="about" route="[[subroute]]"></home-page>
                 </iron-pages>
             </app-header-layout>
         </app-drawer-layout>
@@ -71,6 +71,8 @@
     <script>
         Polymer({
             is: 'the-app',
+            behaviors: [ ReduxBehavior ],
+            observers: [ '_routePageChanged(routeData.page)'],
             properties: {
                 page: {
                     type: String,
@@ -80,11 +82,16 @@
                 mobile:{
                     type: Boolean,
                     observer: '_mobile',
+                },
+                joinModal:{
+                    type: Boolean,
+                    statePath: 'joinModal',
+                },
+                loginModal:{
+                    type: Boolean,
+                    statePath: 'loginModal',
                 }
             },
-            observers: [
-                '_routePageChanged(routeData.page)',
-            ],
             tester: function(){
                 console.log("Yes");
             },
@@ -139,14 +146,5 @@
                 }
             },
         });
-
-    document.querySelector('the-app').addEventListener('modal', function (event) {
-        if( event.detail.name == 'join' && event.detail.action == 'close'){
-            this.joinmodal = false
-        }
-        if( event.detail.name == 'join' && event.detail.action == 'open'){
-            this.joinmodal = true
-        }
-    })
     </script>
 </dom-module>
