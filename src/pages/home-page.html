@@ -1,17 +1,43 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/login-fire/login-fire-social.html">
 <link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
 <link rel="import" href="../redux-store.html">
 
 <dom-module id="home-page">
 
 <template>
+    <iron-media-query query="max-width: 415px" query-matches="{{mobile}}"></iron-media-query>
 
     <style>
     :host {
         display: block;
     }
+    login-fire-button{
+        width: 100%;
+    }
+    .tab{
+        width: 100%;
+        height: 400px;
+        display: block;
+    }
+    /*login-fire-social{
+        width: 100%;
+    }*/
     </style>
-    <h1>Home</h1></br>{{localize('join')}}</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+
+    <template is="dom-if" if="{{mobile}}">
+        <div class="tab">
+
+    <login-fire-social
+        app-name="thefirebase"
+        providers="twitter, facebook"
+        user="{{_user}}"
+        signed-in="{{_signedIn}}">
+    </login-fire-social>
+
+      </div>
+    </template>
+
 </template>
 
 <script>

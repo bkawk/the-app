@@ -13,6 +13,7 @@
 <link rel="import" href="components/join-modal.html">
 <link rel="import" href="components/login-modal.html">
 <link rel="import" href="redux-store.html">
+<link rel="import" href="../bower_components/login-fire/login-fire.html">
 
 <dom-module id="the-app">
     <template>
@@ -22,20 +23,20 @@
             display: block;
             }
             iron-pages {
-                width: 100%;
+                width: calc(100% - 32px);
                 margin: auto;
                 max-width: var(--app-fixed-width);
-                padding: 0 16px;
+                padding: 16px;
             }
 
         </style>
 
 <!--Firebase-->
-        <firebase-app
-            name="the-app-firebase"
-            api-key="AIzaSyBMogvHVn9zNl_pKt0ZNlOm4CDQN80e4go"
-            auth-domain="the-app-4e238.firebaseapp.com"
-            database-url="https://the-app-4e238.firebaseio.com/"
+        <firebase-app 
+            name="thefirebase" 
+            api-key="AIzaSyAhoCXxkY-ffNwA_7L7HIwBVpASYj1btNE" 
+            auth-domain="convoo-login-demo.firebaseapp.com" 
+            database-url="https://convoo-login-demo.firebaseio.com"
             storage-bucket="the-app-4e238.appspot.com",
             messaging-sender-id="916383740318">
         </firebase-app>
