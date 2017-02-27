@@ -3,7 +3,7 @@
 <link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
 <link rel="import" href="../redux-store.html">
 
-<dom-module id="join-component">
+<dom-module id="join-modal">
 
 <template>
     <style is="custom-style">
@@ -11,7 +11,7 @@
             display: block;
         }
         .overlay{
-            background-color: #303339;
+            background-color: var(--modal-overlay-color);
             position: absolute;
             top: 0px;
             right: 0px;
@@ -54,7 +54,7 @@
             transition-timing-function: ease-out;
             animation-fill-mode: forwards;
             margin: auto;
-            border-radius: 2px;
+            border-radius: var(--modal-border-radius);
             cursor: default;
             -webkit-box-shadow: -1px 6px 21px 0px rgba(0,0,0,0.15);
             -moz-box-shadow: -1px 6px 21px 0px rgba(0,0,0,0.15);
@@ -65,14 +65,10 @@
             transition-timing-function: ease-in;
             animation-fill-mode: forwards;
         }
-        .small {
-            color: #82858c;
-            font-size: 15px; 
-            font-weight: normal; 
-            line-height: 20px; 
-            display: block; 
-            padding-top: 13px; 
+        small{
+            @apply(--small-text);
         }
+
         @keyframes fadein {
             from { opacity: 0; }
             to  { opacity: 0.6; }
@@ -105,7 +101,7 @@
     <div class="outer-container" on-tap="_close">
         <div class="container" onclick="event.stopPropagation()" id="container">
             <h2>{{localize('join')}}</h2>
-            <small class="small">{{localize('intro')}}</small>
+            <small>{{localize('intro')}}</small>
         </div>
     </div>
     <div class="overlay" id="overlay"></div>
@@ -114,7 +110,7 @@
 
 <script>
     Polymer({
-        is: 'join-component',
+        is: 'join-modal',
         behaviors: [ ReduxBehavior, Polymer.AppLocalizeBehavior ],
         actions: {
             JOIN_MODAL: function(joinModal){

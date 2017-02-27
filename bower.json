@@ -8,7 +8,8 @@
     "app-route": "PolymerElements/app-route#^0.9.3",
     "polymerfire": "^0.10.3",
     "app-localize-behavior": "PolymerElements/app-localize-behavior#^0.10.1",
-    "polymer-redux": "tur-nr/polymer-redux#^0.4.0"
+    "polymer-redux": "tur-nr/polymer-redux#^0.4.0",
+    "login-fire": "^0.1.4"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
