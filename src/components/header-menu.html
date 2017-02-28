@@ -17,7 +17,6 @@
         .drop-down-container{
             display: var(--drop-down-display, none);
         }
-
         .animateIn{
             opacity: 0;
             animation: 200ms fadeIn;
@@ -34,21 +33,21 @@
         @keyframes fadeIn {
             0% {
                 opacity: 0;
-                top: -20px;
+                transform: translate(0px, 20px);
             }
             100% {
                 opacity: 1;
-                top: 0px;
+                transform: translate(0px, 0px);
             }
         }
         @keyframes fadeOut {
             0% {
                 opacity: 1;
-                top: 0px;
+                transform: translate(0px, 0px);
             }
             100% {
                 opacity: 0;
-                top: -20px;
+                transform: translate(0px, 20px);
             }
         }
 
