@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/login-fire/login-fire-social.html">
 <link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
+<link rel="import" href="../components/mobile-join-mini.html">
 <link rel="import" href="../redux-store.html">
 
 <dom-module id="home-page">
@@ -12,70 +13,10 @@
     :host {
         display: block;
     }
-
-    .social-container{
-        width: 100%;
-        background-color: white;
-        border-radius: 2px;
-        overflow: hidden;
-        @apply(--container-shadow);
-    }
-    .register{
-        border-top: 1px solid #f5f5f5;
-        width: 100%;
-        padding: 6px;
-        text-align: center;
-        font-weight: bold;
-        color: #4978b3;
-        font-size: 11px;
-        padding: 14px 0px;
-    }
-    .title{
-        width: 100%;
-        text-align: center;
-        margin-top: 20px;
-        font-size: 16px;
-    }
-    .subtitle{
-        width: 100%;
-        text-align: center;
-        margin-top: 5px;
-        margin-bottom: 15px;
-        font-size: 12px;
-        color: gray;
-    }
-    .social-container a{
-        text-decoration: none;
-    }
-    login-fire-social.custom{
-    --login-fire-button: {
-        min-width: calc(100% - 10px);
-    }
-    --login-fire-button-text: {
-        font-size: 13px;
-        font-weight: bold;
-    }
-    --login-fire-button-icon: {
-        display: none
-    }
-}
     </style>
 
     <template is="dom-if" if="{{mobile}}">
-        <div class="login-container">
-            <div class="social-container">
-                <div class="title">Sign Up</div>
-                <div class="subtitle">You are going to love it!</div>
-                <login-fire-social 
-                    providers="facebook, twitter" 
-                    app-name="maxHorizontalDemo" 
-                    class="custom"
-                    user="{{user}}"
-                    redirect>
-                    </login-fire-social>
-                    <a href="/join"><div class="register">JOIN THEAPP</div></a>
-            </div>
-        </div>
+        <mobile-join-mini></mobile-join-mini>
     </template>
 
 </template>

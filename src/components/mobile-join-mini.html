@@ -1,0 +1,103 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
+<link rel="import" href="../redux-store.html">
+
+<dom-module id="mobile-join-mini">
+
+<template>
+    <style is="custom-style">
+        :host {
+            display: block;
+        }
+        .social-container{
+            width: 100%;
+            background-color: white;
+            border-radius: 2px;
+            overflow: hidden;
+            @apply(--container-shadow);
+        }
+        .register{
+            border-top: 1px solid #f5f5f5;
+            width: 100%;
+            padding: 6px;
+            text-align: center;
+            font-weight: bold;
+            color: #4978b3;
+            font-size: 11px;
+            padding: 14px 0px;
+        }
+        .title{
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+        .subtitle{
+            width: 100%;
+            text-align: center;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            font-size: 12px;
+            color: gray;
+        }
+        .social-container a{
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        login-fire-social.custom{
+            --login-fire-button: {
+                min-width: calc(100% - 10px);
+            }
+            --login-fire-button-text: {
+                font-size: 13px;
+                font-weight: bold;
+            }
+            --login-fire-button-icon: {
+                display: none
+            }
+        }
+
+    </style>
+        <div class="login-container">
+            <div class="social-container">
+                <div class="title">Sign Up</div>
+                <div class="subtitle">You are going to love it!</div>
+                <login-fire-social 
+                    providers="facebook, twitter" 
+                    app-name="thefirebase" 
+                    class="custom"
+                    user="{{user}}"
+                    redirect flat>
+                    </login-fire-social>
+                    <a href="/join"><div class="register">JOIN THEAPP</div></a>
+            </div>
+        </div>
+
+
+</template>
+
+<script>
+    Polymer({
+        is: 'mobile-join-mini',
+        behaviors: [ ReduxBehavior, Polymer.AppLocalizeBehavior ],
+        actions: {
+            JOIN_MODAL: function(joinModal){
+                return { type: 'JOIN_MODAL', joinModal: joinModal}
+            }
+        },
+        properties: {
+            language: {
+                type: String,
+                statePath: 'language',
+            },
+        },
+        attached: function() {
+            this.loadResources(this.resolveUrl('../locales.json'));
+        },
+
+    });
+</script>
+
+</dom-module>
