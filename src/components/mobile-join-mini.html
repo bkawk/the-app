@@ -1,5 +1,4 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
 <link rel="import" href="../redux-store.html">
 
@@ -26,6 +25,7 @@
             color: #4978b3;
             font-size: 11px;
             padding: 14px 0px;
+            text-transform: uppercase;
         }
         .title{
             width: 100%;
@@ -62,8 +62,8 @@
     </style>
         <div class="login-container">
             <div class="social-container">
-                <div class="title">Sign Up</div>
-                <div class="subtitle">You are going to love it!</div>
+                <div class="title">{{localize('login-why')}}</div>
+                <div class="subtitle">{{localize('login-because')}}</div>
                 <login-fire-social 
                     providers="facebook, twitter" 
                     app-name="thefirebase" 
@@ -71,7 +71,7 @@
                     user="{{user}}"
                     redirect flat>
                     </login-fire-social>
-                    <a href="/join"><div class="register">JOIN THEAPP</div></a>
+                    <a href="/join"><div class="register">{{localize('join')}}</div></a>
             </div>
         </div>
 
@@ -83,8 +83,8 @@
         is: 'mobile-join-mini',
         behaviors: [ ReduxBehavior, Polymer.AppLocalizeBehavior ],
         actions: {
-            JOIN_MODAL: function(joinModal){
-                return { type: 'JOIN_MODAL', joinModal: joinModal}
+            USER: function(user){
+                return { type: 'USER', user: user}
             }
         },
         properties: {
@@ -92,9 +92,19 @@
                 type: String,
                 statePath: 'language',
             },
+            user: {
+                type: Object,
+                observer: '_user'
+            }
         },
         attached: function() {
             this.loadResources(this.resolveUrl('../locales.json'));
+        },
+        _user: function(){
+            if(this.user){
+                window.localStorage.setItem("authenticated", "true");
+            }
+            this.dispatch('USER', this.user);
         },
 
     });

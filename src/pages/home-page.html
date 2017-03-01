@@ -15,9 +15,11 @@
     }
     </style>
 
+<template is="dom-if" if="{{!auth}}">
     <template is="dom-if" if="{{mobile}}">
         <mobile-join-mini></mobile-join-mini>
     </template>
+</template>
 
 </template>
 
@@ -28,12 +30,31 @@
         properties: {
             language: {
                 type: String,
-                statePath: 'language',
+                statePath: 'language'
             },
+            user: {
+                type: Object,
+                statePath: 'user',
+                observer: '_user'
+            },
+            auth:{
+                type: Boolean,
+                value: false,
+            }
         },
         attached: function() {
             this.loadResources(this.resolveUrl('../locales.json'));
+            var authenticated = window.localStorage.getItem("authenticated");
+            if(authenticated){ this.auth = true}
         },
+        _user: function(){
+            if(this.user){
+                this.auth = true;
+            } else {
+                this.auth = false;
+            } 
+        },
+        
     });
 </script>
 

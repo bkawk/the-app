@@ -9,6 +9,10 @@
             return initialState
         };
         switch(action.type){
+            case 'USER':
+                var user = state.user;
+                user  = action.user;
+                return Object.assign({}, state, {user: user})
             case 'LANGUAGE':
                 var language = state.language;
                 language  = action.language;

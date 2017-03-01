@@ -2,6 +2,8 @@
     "English": {
         "name": "TheApp",
         "login": "Log In",
+        "login-why": "Log In its great",
+        "login-because": "you will have a great time",
         "join": "Join TheApp",
         "languages": "English",
         "intro": "TheApp allows you to quickly scaffold a Polymer app",
@@ -11,6 +13,8 @@
     "中文": {
         "name": "该应",
         "login": "登录",
+        "login-why": "登录",
+        "login-because": "登录登录",
         "join": "注册",
         "languages": "语言",
         "intro":"该应用程序允许您快速构建Polymer应用程序",
