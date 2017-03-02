@@ -9,7 +9,7 @@
     "polymerfire": "^0.10.3",
     "app-localize-behavior": "PolymerElements/app-localize-behavior#^0.10.1",
     "polymer-redux": "tur-nr/polymer-redux#^0.4.0",
-    "login-fire": "https://github.com/convoo/login-fire.git#11_multitab"
+    "login-fire": "https://github.com/convoo/login-fire.git#46_localization"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

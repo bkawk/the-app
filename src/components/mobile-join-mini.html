@@ -67,7 +67,10 @@
                 <login-fire-social 
                     providers="facebook, twitter" 
                     app-name="thefirebase" 
-                    class="custom" flat>
+                    class="custom" 
+                    locales-file="/src/locales.json"
+                    language="{{language}}"
+                    flat>
                 </login-fire-social>
                 <a href="/join"><div class="register">{{localize('join')}}</div></a>
             </div>
