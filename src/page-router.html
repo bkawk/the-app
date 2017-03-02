@@ -65,9 +65,9 @@
                 <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
 <!--Pages-->
                 <iron-pages role="main" selected="[[page]]" attr-for-selected="name" fallback-selection="error">
-                        <home-page id="home" name="home" route="[[subroute]]"></home-page>
-                        <about-page id="about" name="about" route="[[subroute]]"></about-page>
-                        <error-page id="error" name="error" route="[[subroute]]"></error-page>
+                        <home-page id="home" name="home" route="[[route]]"></home-page>
+                        <about-page id="about" name="about" route="[[route]]"></about-page>
+                        <error-page id="error" name="error" route="[[route]]"></error-page>
                 </iron-pages>
             </app-header-layout>
         </app-drawer-layout>

@@ -13,9 +13,10 @@
     </style>
     <app-route
         route="{{route}}"
-        pattern="/:category">
+        pattern="/about/:category"
+        data="{{routeData}}" tail="{{subroute}}">
     </app-route>
-    <h1>About -1- {{route}} -2- {{category}} </h1>
+    <h1>About -1- {{route}} -2- {{routeData.category}} </h1>
 </template>
 
 <script>
