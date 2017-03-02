@@ -1,6 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
-
+<link rel="import" href="../redux-store.html">
 <dom-module id="about-page">
 
 <template>
@@ -16,17 +16,15 @@
 <script>
     Polymer({
         is: 'about-page',
-        behaviors: [
-            Polymer.AppLocalizeBehavior
-        ],
+        behaviors: [ ReduxBehavior, Polymer.AppLocalizeBehavior ],
         properties: {
-            item: {
-            type: Object
-            }
+            language: {
+                type: String,
+                statePath: 'language'
+            },
         },
         attached: function() {
             this.loadResources(this.resolveUrl('../locales.json'));
-            this.language = window.localStorage.getItem("language");
         },
     });
 </script>

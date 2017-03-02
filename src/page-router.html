@@ -64,7 +64,7 @@
                 <app-location route="{{route}}"></app-location>
                 <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
 <!--Pages-->
-                <iron-pages role="main" selected="[[page]]" attr-for-selected="name" fallback-selection="path-warning">
+                <iron-pages role="main" selected="[[page]]" attr-for-selected="name" fallback-selection="error">
                         <home-page id="home" name="home" route="[[subroute]]"></home-page>
                         <about-page id="about" name="about" route="[[subroute]]"></home-page>
                 </iron-pages>
@@ -79,6 +79,9 @@
             actions: {
                 USER: function(user){
                     return { type: 'USER', user: user}
+                },
+                MOBILE: function(mobile){
+                    return { type: 'MOBILE', mobile: mobile}
                 }
             },
             observers: [ '_routePageChanged(routeData.page)'],
@@ -105,13 +108,13 @@
                     statePath: 'loginModal',
                 }
             },
-
             _user: function(){
                 if(this.user){
                     this.dispatch('USER', this.user);
                 }
             },
             _mobile: function(){
+                this.dispatch('MOBILE', this.mobile);
                 var header = this.$.appHeader;
                 if(this.mobile){
                     header.fixed = false;
@@ -127,6 +130,9 @@
                         break;
                     case 'home':
                         href = 'pages/home-page.html';
+                        break;
+                    case 'error':
+                        href = 'pages/error-page.html';
                         break;
                     default:
                         href = 'pages/error-page.html';

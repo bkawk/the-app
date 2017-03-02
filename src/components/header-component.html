@@ -1,5 +1,4 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/iron-media-query/iron-media-query.html">
 <link rel="import" href="../../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
@@ -11,8 +10,7 @@
 <dom-module id="header-component">
 
 <template>
-    <iron-media-query query="max-width: 415px" query-matches="{{mobile}}"></iron-media-query>
-    <style>
+     <style>
     :host {
         display: block;
     }
@@ -106,6 +104,7 @@
             },
             mobile: {
                 type: Boolean,
+                statePath: 'mobile',
                 observer: '_computeSignOut'
             },
             user: {

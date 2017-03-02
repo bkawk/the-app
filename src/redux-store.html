@@ -2,13 +2,17 @@
 <script>
     var initialState = {
         joinModal: false,
-        loginModal: false
+        loginModal: false,
     };
     var reducer = function(state, action){
         if(!state){ 
             return initialState
         };
         switch(action.type){
+            case 'MOBILE':
+                var mobile = state.mobile;
+                mobile  = action.mobile;
+                return Object.assign({}, state, {mobile: mobile})
             case 'USER':
                 var user = state.user;
                 user  = action.user;

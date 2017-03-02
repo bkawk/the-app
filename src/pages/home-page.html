@@ -7,7 +7,6 @@
 <dom-module id="home-page">
 
 <template>
-    <iron-media-query query="max-width: 415px" query-matches="{{mobile}}"></iron-media-query>
 
     <style>
     :host {
@@ -37,12 +36,9 @@
             },
             mobile:{
                 type: Boolean,
+                statePath: 'mobile',
                 observer: '_computeSignOut'
             },
-            signedOut:{
-                type: Boolean,
-                value: true
-            }
         },
         attached: function() {
             this.loadResources(this.resolveUrl('../locales.json'));
