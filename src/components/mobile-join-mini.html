@@ -67,11 +67,9 @@
                 <login-fire-social 
                     providers="facebook, twitter" 
                     app-name="thefirebase" 
-                    class="custom"
-                    user="{{user}}"
-                    redirect flat>
-                    </login-fire-social>
-                    <a href="/join"><div class="register">{{localize('join')}}</div></a>
+                    class="custom" flat>
+                </login-fire-social>
+                <a href="/join"><div class="register">{{localize('join')}}</div></a>
             </div>
         </div>
 
@@ -82,11 +80,6 @@
     Polymer({
         is: 'mobile-join-mini',
         behaviors: [ ReduxBehavior, Polymer.AppLocalizeBehavior ],
-        actions: {
-            USER: function(user){
-                return { type: 'USER', user: user}
-            }
-        },
         properties: {
             language: {
                 type: String,
@@ -100,13 +93,6 @@
         attached: function() {
             this.loadResources(this.resolveUrl('../locales.json'));
         },
-        _user: function(){
-            if(this.user){
-                window.localStorage.setItem("authenticated", "true");
-            }
-            this.dispatch('USER', this.user);
-        },
-
     });
 </script>
 

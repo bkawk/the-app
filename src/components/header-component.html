@@ -57,11 +57,11 @@
     </style>
     <app-toolbar class="toolbar">
         <div class="fixed-width">
-                <template is="dom-if" if="{{mobile}}">
+                <template is="dom-if" if="{{mobiMenu}}">
                     <paper-icon-button icon="menu" flat on-click="_toggleDrawer"></paper-icon-button>
                 </template>
                 <a href="/" class="flexchild"><img src="../../images/logo.svg" alt="{{localize('name')}}"></a>
-                <template is="dom-if" if="{{!mobile}}">
+                <template is="dom-if" if="{{loginMenu}}">
                     <a href="#" class="header-button" on-tap="_join">{{localize('join')}}</a>
                     <a href="#" class="header-button" on-tap="_logIn">{{localize('login')}}</a>
                     <header-menu 
@@ -71,14 +71,14 @@
                         caret>{{localize('languages')}}
                     </header-menu>
                 </template>
-
-                <!--<header-menu 
-                    options="Profile, Settings, Log Out" 
-                    selected="{{selected}}" 
-                    columns="1">
-                    <img src="https://pbs.twimg.com/profile_images/741290730170122240/abfazODg_normal.jpg" style="width:30px; height:30px; border-radius: 50%; margin-top: 11px; margin-bottom: 11px;">
-                </header-menu>   -->
-
+                <template is="dom-if" if="{{userMenu}}">
+                    <header-menu 
+                        options="Log Out" 
+                        selected="{{userMenuSelected}}" 
+                        columns="1">
+                        <img src="https://pbs.twimg.com/profile_images/741290730170122240/abfazODg_normal.jpg" style="width:30px; height:30px; border-radius: 50%; margin-top: 11px; margin-bottom: 11px;">
+                    </header-menu>
+                </template>
         </div>
     </app-toolbar>
 </template>
@@ -105,7 +105,13 @@
                 observer: '_language',
             },
             mobile: {
-                type: Boolean
+                type: Boolean,
+                observer: '_computeSignOut'
+            },
+            user: {
+                type: Object,
+                statePath: 'user',
+                observer: '_computeSignOut'
             },
             drawerOpened: {
                 type: Boolean,
@@ -116,11 +122,29 @@
                 notify: true,
                 reflectToAttribute: true
             },
+
         },
 
         attached: function() {
             this.loadResources(this.resolveUrl('../locales.json'));
             this._language();
+
+        },
+        _computeSignOut: function(){
+            if(this.mobile){   
+                this.mobiMenu = true;
+                this.loginMenu = false;
+                this.userMenu = false;
+            } else {
+                this.mobiMenu = false;
+                if(this.user){
+                    this.loginMenu = false;
+                    this.userMenu = true;
+                } else {
+                    this.loginMenu = true;
+                    this.userMenu = false;
+                }
+            }
         },
         _language: function(){
             this.dispatch('LANGUAGE', this.language);

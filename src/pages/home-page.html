@@ -15,10 +15,8 @@
     }
     </style>
 
-<template is="dom-if" if="{{!auth}}">
-    <template is="dom-if" if="{{mobile}}">
-        <mobile-join-mini></mobile-join-mini>
-    </template>
+<template is="dom-if" if={{signedOut}}>
+    <mobile-join-mini></mobile-join-mini> 
 </template>
 
 </template>
@@ -35,26 +33,32 @@
             user: {
                 type: Object,
                 statePath: 'user',
-                observer: '_user'
+                observer: '_computeSignOut'
             },
-            auth:{
+            mobile:{
                 type: Boolean,
-                value: false,
+                observer: '_computeSignOut'
+            },
+            signedOut:{
+                type: Boolean,
+                value: true
             }
         },
         attached: function() {
             this.loadResources(this.resolveUrl('../locales.json'));
-            var authenticated = window.localStorage.getItem("authenticated");
-            if(authenticated){ this.auth = true}
+            this._computeSignOut();
         },
-        _user: function(){
-            if(this.user){
-                this.auth = true;
-            } else {
-                this.auth = false;
-            } 
-        },
-        
+        _computeSignOut: function(){
+            if(this.mobile){
+                if(this.user){
+                    this.signedOut = false;
+                } else {
+                    this.signedOut = true;
+                }
+            } else { 
+                this.signedOut = false;
+            }
+        },        
     });
 </script>
 
