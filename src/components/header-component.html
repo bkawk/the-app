@@ -102,6 +102,10 @@
                 statePath: 'language',
                 observer: '_language',
             },
+            userMenuSelected:{
+                type: String,
+                observer: '_userMenuSelected',
+            },
             mobile: {
                 type: Boolean,
                 statePath: 'mobile',
@@ -116,18 +120,19 @@
                 type: Boolean,
                 notify: true
             },
-            route:{
-                type: Object,
-                notify: true,
-                reflectToAttribute: true
-            },
-
         },
 
         attached: function() {
             this.loadResources(this.resolveUrl('../locales.json'));
             this._language();
 
+        },
+        _userMenuSelected: function(){
+            var selected = this.userMenuSelected;
+            if(selected == 'Log Out'){
+                this.fire('logout');
+            }
+            
         },
         _computeSignOut: function(){
             if(this.mobile){   

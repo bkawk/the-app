@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
 <link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
 <link rel="import" href="../redux-store.html">
 <dom-module id="about-page">
@@ -10,7 +11,11 @@
         display: block;
     }
     </style>
-    <h1>About</h1>
+    <app-route
+        route="{{route}}"
+        pattern="/:category">
+    </app-route>
+    <h1>About -1- {{route}} -2- {{category}} </h1>
 </template>
 
 <script>
